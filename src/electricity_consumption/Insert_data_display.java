@@ -29,99 +29,105 @@ public class Insert_data_display extends Application {
         grid.setVgap(10); //Vertical space between rows
         grid.setPadding(new Insets(5, 5, 5, 5));
 
-        // Text control for instructions
-        Text insrtText = new Text("Insert Data");
-        insrtText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 26));
+        // Text control
+        Text tilte = new Text("Insert Data");
+        tilte.setFont(Font.font("Tahoma", FontWeight.NORMAL, 26));
         // In column 0, row 0, column span 2 and row span 1
-        grid.add(insrtText, 0, 0, 2, 1);
+        grid.add(tilte, 0, 1, 2, 1);
 
         // Label Date
         Label label0 = new Label("Date: ");
-        grid.add(label0, 0, 1);
+        grid.add(label0, 0, 2);
         // TextField
         TextField date = new TextField();
-        grid.add(date, 1, 1);
+        grid.add(date, 1, 2);
         
         Text devices = new Text("Devices");
         devices.setFont(Font.font("Tahoma", FontWeight.NORMAL, 16));
-        grid.add(devices, 0, 2);
+        grid.add(devices, 0, 3);
         
         Text hours = new Text("Hours");
         hours.setFont(Font.font("Tahoma", FontWeight.NORMAL, 16));
-        grid.add(hours, 1, 2);
+        grid.add(hours, 1, 3);
 
         // Label dishwasher
         Label label1 = new Label("1. Dishwasher ");
-        grid.add(label1, 0, 3);
+        grid.add(label1, 0, 4);
         // TextField
         TextField dishwasher = new TextField();
-        grid.add(dishwasher, 1, 3);
+        grid.add(dishwasher, 1, 4);
         
         // Label Fridge
         Label label2 = new Label("2. Fridge ");
-        grid.add(label2, 0, 4);
+        grid.add(label2, 0, 5);
         // TextField
         TextField fridge = new TextField();
-        grid.add(fridge, 1, 4);
+        grid.add(fridge, 1, 5);
         
         // Label Freezer
         Label label3 = new Label("3. Freezer ");
-        grid.add(label3, 0, 5);
+        grid.add(label3, 0, 6);
         // TextField
         TextField freezer = new TextField();
-        grid.add(freezer, 1, 5);
+        grid.add(freezer, 1, 6);
         
         // Label Laptop
         Label label4 = new Label("4. Laptop ");
-        grid.add(label4, 0, 6);
+        grid.add(label4, 0, 7);
         // TextField
         TextField laptop = new TextField();
-        grid.add(laptop, 1, 6);
+        grid.add(laptop, 1, 7);
         
         // Label Stove
         Label label5 = new Label("5. Stove ");
-        grid.add(label5, 0, 7);
+        grid.add(label5, 0, 8);
         // TextField
         TextField stove = new TextField();
-        grid.add(stove, 1, 7);
+        grid.add(stove, 1, 8);
         
         // Label Oven
         Label label6 = new Label("6. Oven ");
-        grid.add(label6, 0, 8);
+        grid.add(label6, 0, 9);
         // TextField
         TextField oven = new TextField();
-        grid.add(oven, 1, 8);
+        grid.add(oven, 1, 9);
         
         // Label Sauna
         Label label7 = new Label("7. Sauna ");
-        grid.add(label7, 0, 9);
+        grid.add(label7, 0, 10);
         // TextField
         TextField sauna = new TextField();
-        grid.add(sauna, 1, 9);
+        grid.add(sauna, 1, 10);
         
         // Label TV
         Label label8 = new Label("8. TV ");
-        grid.add(label8, 0, 10);
+        grid.add(label8, 0, 11);
         // TextField
         TextField tv = new TextField();
-        grid.add(tv, 1, 10);
+        grid.add(tv, 1, 11);
         
         // Label washing machine 40
         Label label9 = new Label("9. Washing machine (40 degree) ");
-        grid.add(label9, 0, 11);
+        grid.add(label9, 0, 12);
         // TextField
         TextField wm40 = new TextField();
-        grid.add(wm40, 1, 11);
+        grid.add(wm40, 1, 12);
         
         // Label washing machine 60
-        Label label10 = new Label("9. Washing machine (60 degree) ");
-        grid.add(label10, 0, 12);
+        Label label10 = new Label("10. Washing machine (60 degree) ");
+        grid.add(label10, 0, 13);
         // TextField
         TextField wm60 = new TextField();
-        grid.add(wm60, 1, 12);
+        grid.add(wm60, 1, 13);
 
-        Button btn = new Button("Insert");
-        grid.add(btn, 1, 13);
+        // BUTTONS
+        // Go home button
+        Button home = new Button("<<");
+        grid.add(home, 0, 0);
+        
+        // Insert Button
+        Button insert = new Button("Insert");
+        grid.add(insert, 1, 14);
 
         Text resultText = new Text();
         grid.add(resultText, 0, 6, 2, 1);
@@ -129,16 +135,16 @@ public class Insert_data_display extends Application {
 
         
         // Event handling for button
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-
+        home.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                
+            Homepage homepg = new Homepage();
+            homepg.start(primaryStage);
             }
         });
 
         //Scene is container for all content 
-        Scene scene = new Scene(grid, 700,675);
+        Scene scene = new Scene(grid, 800,775);
         primaryStage.setScene(scene);
 
         primaryStage.show();

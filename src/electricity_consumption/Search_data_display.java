@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -27,7 +28,8 @@ public class Search_data_display extends Application {
         grid.setHgap(10); //Horizontal space between columns
         grid.setVgap(10); //Vertical space between rows
         grid.setPadding(new Insets(25, 25, 25, 25));
-
+        
+        
         // Text control
         Text tilte = new Text("Search a date");
         tilte.setFont(Font.font("Tahoma", FontWeight.NORMAL, 26));
@@ -44,14 +46,22 @@ public class Search_data_display extends Application {
         grid.add(date, 0, 3);
         
         
-        Button btn = new Button("Search");
-        grid.add(btn, 0, 4);
+        // BUTTONS
+        // Search button
+        Button search = new Button("Search");
+        grid.add(search, 0, 4);
+        
+        // Go home button
+        Button home = new Button("<<");
+        grid.add(home, 0, 0);
+        
         
         // Event handling for button
-        btn.setOnAction(new EventHandler<ActionEvent>() {
+        home.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                
+            Homepage homepg = new Homepage();
+            homepg.start(primaryStage);
             }
         });
 

@@ -5,7 +5,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
@@ -15,7 +14,7 @@ public class Homepage extends Application {
     //start method is main entry point for application. 
     //Stage is top-level container.
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         primaryStage.setTitle("Electricity Consumption");
 
         //GridPane for flexible layout of controls in rows and columns
@@ -40,6 +39,14 @@ public class Homepage extends Application {
             public void handle(ActionEvent e) {
                 Insert_data_display insertdata = new Insert_data_display();
                 insertdata.start(primaryStage);
+            }
+        });
+        
+        btn2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                Search_data_display searchdate = new Search_data_display();
+                searchdate.start(primaryStage);
             }
         });
 
