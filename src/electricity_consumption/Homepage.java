@@ -44,7 +44,7 @@ public class Homepage extends Application {
         grid.add(btn3, 0, 7);
         
         //Scene is container for all content 
-        Scene scene = new Scene(grid, 400, 425);
+        Scene scene = new Scene(grid, 400, 450);
         primaryStage.setScene(scene);
 
         primaryStage.show();
