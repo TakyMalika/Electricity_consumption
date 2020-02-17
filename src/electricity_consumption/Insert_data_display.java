@@ -10,6 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ComboBoxBase;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -111,12 +112,25 @@ public class Insert_data_display extends Application {
         
         
         // Event handling for buttons
+        // Home button handler
         home.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-            Homepage homepg = new Homepage();
-            homepg.start(primaryStage);
+            	Homepage homepg = new Homepage();
+            	homepg.start(primaryStage);
             }
+        });
+        
+        // Insert button handler
+        insert.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				String insertedDate = date.getText();
+				String insertedhour = hour.getText();
+				String device = comboBox.getValue();
+				
+				textArea.appendText(insertedDate + "\t" + device + "\t" + insertedhour + "\n");
+			}
         });
 
     }
