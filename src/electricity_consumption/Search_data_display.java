@@ -7,6 +7,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -16,24 +17,28 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Search_data_display extends Application {
-	//start method is main entry point for application. 
-    //Stage is top-level container.
+	
     @Override
     public void start(Stage primaryStage) {
+    	
+    	// START OF DISPLAY
         primaryStage.setTitle("Electricity Consumption");
+        
+        //Instantiating the BorderPane class
+        BorderPane root = new BorderPane();
 
+        // Start of grid
         //GridPane for flexible layout of controls in rows and columns
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10); //Horizontal space between columns
         grid.setVgap(10); //Vertical space between rows
-        grid.setPadding(new Insets(25, 25, 25, 25));
+        grid.setPadding(new Insets(25, 50, 25, 50));
         
         
         // Text control
         Text tilte = new Text("Search a date");
         tilte.setFont(Font.font("Tahoma", FontWeight.NORMAL, 26));
-        // In column 0, row 0, column span 2 and row span 1
         grid.add(tilte, 0, 1);
         
         Text txt = new Text("Write down the date you want to search");
@@ -45,18 +50,37 @@ public class Search_data_display extends Application {
         TextField date = new TextField();
         grid.add(date, 0, 3);
         
-        
-        // BUTTONS
-        // Search button
+        // Insert Button
         Button search = new Button("Search");
-        grid.add(search, 0, 4);
+        grid.add(search, 1, 3);
         
-        // Go home button
-        Button home = new Button("<<");
-        grid.add(home, 0, 0);
+        // End of grid
+        
+        // Start of root
+        // Home button
+        Button home = new Button("Home");
+        root.setTop(home);
+        
+        // Setting grid on left of BorderPane
+        root.setLeft(grid);
+        
+        //TextArea in the center fills the available space
+        TextArea textArea = new TextArea();
+        textArea.setEditable(false);
+        root.setBottom(textArea);
+        
+        // End of root
+        
+        //Scene is container for all content 
+        Scene scene = new Scene(root, 450, 450);
+        primaryStage.setScene(scene);
+
+        primaryStage.show();
+        
+        // END OF DISPLAY
         
         
-        // Event handling for button
+        // Event handling for buttons
         home.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -64,12 +88,6 @@ public class Search_data_display extends Application {
             homepg.start(primaryStage);
             }
         });
-
-        //Scene is container for all content 
-        
-        Scene scene = new Scene(grid, 500, 475);
-        primaryStage.setScene(scene);
-
-        primaryStage.show();
+   
     }
 }
