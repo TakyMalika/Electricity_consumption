@@ -44,7 +44,7 @@ public class Insert_data implements Serializable {
 
 	// toString method
 	public String toString() {
-        return device + "\t" + consumption + "\n";
+        return date + "\t" + device + "\t" + consumption + "\n";
     }
 
 }

@@ -95,24 +95,37 @@ public class Search_data_display extends Application {
             }
         });
         
+        File file = new File("U:\\OOP\\Electricity_consumption\\src\\DevicesConsumption.txt");
+        
         // Search button handler
         search.setOnAction(new EventHandler<ActionEvent>() {
         	public void handle(ActionEvent arg0) {
-        		File file = new File("U:\\OOP\\Electricity_consumption\\src\\DevicesConsumption.txt");
+        		
+        		
         		
         		//Reading from the file
 				try (ObjectInputStream file_in = new ObjectInputStream(new FileInputStream(file))){
 					
+					@SuppressWarnings("unchecked")
 					ArrayList<Insert_data> data = (ArrayList<Insert_data>)file_in.readObject();
 					System.out.println("reading");
+					
+					
+					String d = date.getText();
+					
+					
 					
 					//Print data to text area
 					TextArea TA = new TextArea();
 					textArea.setEditable(false);
-					for(Insert_data print: data) {
-						TA.appendText(" " + print);
+					for(Insert_data print : data) {
+						if( d.equals(print.getDate())) {
+							TA.appendText(print.getDevice() + "\t" + print.getConsumption() + " \n");
+						}
 					}
 					root.setBottom(TA);
+					
+					
 		        }
 		        catch(Exception e) {
 		            System.out.println("Problems with input" + file);

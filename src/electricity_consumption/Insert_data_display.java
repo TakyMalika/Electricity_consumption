@@ -2,9 +2,7 @@ package electricity_consumption;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -181,22 +179,22 @@ public class Insert_data_display extends Application {
 					
 					ArrayList<Insert_data> data = (ArrayList<Insert_data>)file_in.readObject();
 					System.out.println("reading");
+					
+					
+					
+					//Print data to text area
+					TextArea TA = new TextArea();
+					textArea.setEditable(false);
+					for(Insert_data print: data) {
+						TA.appendText(" " + print);
+					}
+					root.setBottom(TA);
 		        }
 		        catch(Exception e) {
 		            System.out.println("Problems with input" + file);
 		            e.printStackTrace();
 		        }
 			    
-				
-				
-				
-				//Print data to text area
-				TextArea TA = new TextArea();
-				textArea.setEditable(false);
-				for(Insert_data print: data) {
-					TA.appendText(" " + print);
-				}
-				root.setBottom(TA);
 				
 	
 			}
