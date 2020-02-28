@@ -1,5 +1,14 @@
 package electricity_consumption;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,7 +19,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ComboBoxBase;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -83,7 +91,7 @@ public class Insert_data_display extends Application {
 
         // Insert Button
         Button insert = new Button("Insert");
-        grid.add(insert, 2, 4);;
+        grid.add(insert, 2, 4);
         
         // End of grid
         
@@ -103,7 +111,7 @@ public class Insert_data_display extends Application {
         // End of root
         
         //Scene is container for all content 
-        Scene scene = new Scene(root, 650, 450);
+        Scene scene = new Scene(root, 650, 600);
         primaryStage.setScene(scene);
 
         primaryStage.show();
@@ -121,17 +129,75 @@ public class Insert_data_display extends Application {
             }
         });
         
+        
+        ArrayList<Insert_data> data = new ArrayList<>();	//ArrayList for insert data
+        
+		
+		
         // Insert button handler
         insert.setOnAction(new EventHandler<ActionEvent>() {
+			@SuppressWarnings("unchecked")
 			@Override
 			public void handle(ActionEvent arg0) {
-				String insertedDate = date.getText();
-				String insertedhour = hour.getText();
-				String device = comboBox.getValue();
 				
-				textArea.appendText(insertedDate + "\t" + device + "\t" + insertedhour + "\n");
+				File file = new File("U:\\OOP\\Electricity_consumption\\src\\DevicesConsumption.txt");
+		        
+				String d = date.getText();
+				String option = comboBox.getValue();
+				double h = Double.parseDouble(hour.getText());
+				
+				double power = 0;
+				
+				switch(option) {
+					case "Dishwasher": power = 1600; break;
+					case "Fridge": power = 200; break;
+					case "Freezer": power = 400; break;
+					case "Laptop": power = 50; break;
+					case "Stove": power = 1000; break;
+					case "Oven": power = 800; break;
+					case "Sauna": power = 2000; break;
+					case "TV": power = 70; break;
+					case "Washing machine (40 degree)": power = 2000; break;
+					case "Washing machine (60 degree)": power = 2500; break;
+				}
+				
+				double c = (power * h) / 1000;
+				
+				data.add(new Insert_data(d, option, c));
+				
+				try (ObjectOutputStream file_out = new ObjectOutputStream(new FileOutputStream(file))){
+					System.out.println("writing");
+		            	file_out.writeObject(data);
+		            	
+		        }
+		        catch(Exception e) {
+		            System.out.println("Problems with output" + file);
+		            e.printStackTrace();
+		        }
+				
+				
+				try (ObjectInputStream file_in = new ObjectInputStream(new FileInputStream(file))){
+					
+					ArrayList<Insert_data> data = (ArrayList<Insert_data>)file_in.readObject();
+					System.out.println("reading");
+		        }
+		        catch(Exception e) {
+		            System.out.println("Problems with input" + file);
+		            e.printStackTrace();
+		        }
+			    
+				
+				
+				
+				//Print data to text area
+				TextArea TA = new TextArea();
+				TA.appendText(" " + data);
+				root.setBottom(TA);
+				
+	
 			}
         });
-
+        
+        
     }
 }
