@@ -1,5 +1,10 @@
 package electricity_consumption;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -81,12 +86,40 @@ public class Search_data_display extends Application {
         
         
         // Event handling for buttons
+        // Home button handler
         home.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
             Homepage homepg = new Homepage();
             homepg.start(primaryStage);
             }
+        });
+        
+        // Search button handler
+        search.setOnAction(new EventHandler<ActionEvent>() {
+        	public void handle(ActionEvent arg0) {
+        		File file = new File("U:\\OOP\\Electricity_consumption\\src\\DevicesConsumption.txt");
+        		
+        		//Reading from the file
+				try (ObjectInputStream file_in = new ObjectInputStream(new FileInputStream(file))){
+					
+					ArrayList<Insert_data> data = (ArrayList<Insert_data>)file_in.readObject();
+					System.out.println("reading");
+					
+					//Print data to text area
+					TextArea TA = new TextArea();
+					textArea.setEditable(false);
+					for(Insert_data print: data) {
+						TA.appendText(" " + print);
+					}
+					root.setBottom(TA);
+		        }
+		        catch(Exception e) {
+		            System.out.println("Problems with input" + file);
+		            e.printStackTrace();
+		        }
+				
+        	}
         });
    
     }

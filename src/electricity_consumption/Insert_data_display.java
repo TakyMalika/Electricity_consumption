@@ -131,7 +131,7 @@ public class Insert_data_display extends Application {
         
         
         ArrayList<Insert_data> data = new ArrayList<>();	//ArrayList for insert data
-        
+        File file = new File("U:\\OOP\\Electricity_consumption\\src\\DevicesConsumption.txt");
 		
 		
         // Insert button handler
@@ -140,7 +140,7 @@ public class Insert_data_display extends Application {
 			@Override
 			public void handle(ActionEvent arg0) {
 				
-				File file = new File("U:\\OOP\\Electricity_consumption\\src\\DevicesConsumption.txt");
+				
 		        
 				String d = date.getText();
 				String option = comboBox.getValue();
@@ -165,6 +165,7 @@ public class Insert_data_display extends Application {
 				
 				data.add(new Insert_data(d, option, c));
 				
+				//Writing to the file
 				try (ObjectOutputStream file_out = new ObjectOutputStream(new FileOutputStream(file))){
 					System.out.println("writing");
 		            	file_out.writeObject(data);
@@ -175,7 +176,7 @@ public class Insert_data_display extends Application {
 		            e.printStackTrace();
 		        }
 				
-				
+				//Reading from the file
 				try (ObjectInputStream file_in = new ObjectInputStream(new FileInputStream(file))){
 					
 					ArrayList<Insert_data> data = (ArrayList<Insert_data>)file_in.readObject();
@@ -191,7 +192,10 @@ public class Insert_data_display extends Application {
 				
 				//Print data to text area
 				TextArea TA = new TextArea();
-				TA.appendText(" " + data);
+				textArea.setEditable(false);
+				for(Insert_data print: data) {
+					TA.appendText(" " + print);
+				}
 				root.setBottom(TA);
 				
 	
