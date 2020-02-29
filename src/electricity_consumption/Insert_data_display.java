@@ -176,7 +176,7 @@ public class Insert_data_display extends Application {
 				try (ObjectInputStream file_in = new ObjectInputStream(new FileInputStream(file))){
 					ArrayList<Insert_data> data = (ArrayList<Insert_data>)file_in.readObject();
 					
-					//Print data to the text area
+					//Print data to text area
 					TextArea TA = new TextArea();
 					textArea.setEditable(false);
 					for(Insert_data print: data) {
