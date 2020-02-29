@@ -46,7 +46,7 @@ public class Search_data_display extends Application {
         tilte.setFont(Font.font("Tahoma", FontWeight.NORMAL, 26));
         grid.add(tilte, 0, 1);
         
-        Text txt = new Text("Write down the date you want to search");
+        Text txt = new Text("Write down the date you want to search \n(DD/MM/YYYY)");
         txt.setFont(Font.font("Tahoma", FontWeight.NORMAL, 16));
         // In column 0, row 0, column span 2 and row span 1
         grid.add(txt, 0, 2);
@@ -100,10 +100,8 @@ public class Search_data_display extends Application {
         // Search button handler
         search.setOnAction(new EventHandler<ActionEvent>() {
         	public void handle(ActionEvent arg0) {
-        		
         		//Reading from the file
 				try (ObjectInputStream file_in = new ObjectInputStream(new FileInputStream(file))){
-					
 					@SuppressWarnings("unchecked")
 					ArrayList<Insert_data> data = (ArrayList<Insert_data>)file_in.readObject();
 					System.out.println("reading");
@@ -120,16 +118,13 @@ public class Search_data_display extends Application {
 						}
 					}
 					root.setBottom(TA);
-					
-					
+						
 		        }
 		        catch(Exception e) {
 		            System.out.println("Problems with input" + file);
 		            e.printStackTrace();
 		        }
-				
         	}
         });
-   
     }
 }
