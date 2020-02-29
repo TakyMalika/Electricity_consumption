@@ -23,8 +23,10 @@ import javafx.stage.Stage;
 
 public class Bar_chart {
 	public void start(Stage primaryStage) throws Exception {
+		// START OF DISPLAY
 		primaryStage.setTitle("Electricity Consumption");
 		
+		//Instantiating the BorderPane class
 		BorderPane root = new BorderPane();
 		
 		//GridPane for flexible layout of controls in rows and columns
@@ -34,79 +36,63 @@ public class Bar_chart {
         grid.setVgap(10); //Vertical space between rows
         grid.setPadding(new Insets(25, 50, 25, 50));
 		
-       
-        
         
         File file = new File("U:\\OOP\\Electricity_consumption\\src\\DevicesConsumption.txt");
         
 		//Reading from the file
 		try (ObjectInputStream file_in = new ObjectInputStream(new FileInputStream(file))){
-			
 			@SuppressWarnings("unchecked")
 			ArrayList<Insert_data> data = (ArrayList<Insert_data>)file_in.readObject();
 			System.out.println("reading");
 			
-			
-				
-			
-			
-			
+			// Creating axises and the bar chart
 			final CategoryAxis xAxis = new CategoryAxis(); //String category
 	        final NumberAxis yAxis = new NumberAxis();  
 	        final BarChart<String, Number> barchart = new BarChart<>(xAxis,yAxis);
 	        
+	        // Labeling
 	        barchart.setTitle("Electricity Consumption");
 	        barchart.setLegendVisible(false); //Just one series, legend is not needed
 	        xAxis.setLabel("Devices");
 	        yAxis.setLabel("Consumption rate"); 
 	        
+	        // Creating new series
 	        XYChart.Series<String, Number> series = new Series<>();
-	       
-	        System.out.println(data);
-	        
-	        
-	        
+	 
+	        /* This loop checks the repetition of devices and
+	         * sum up the consumption value */
 	        for(int i = 0; i < data.size(); i++) {
-	        	//double[] sum = {data.get(i).getConsumption()};
 	        	for(int j = i + 1; j < data.size(); j++) {
 	        		if(data.get(i).getDevice().equals(data.get(j).getDevice())) {
 	        			double sum = data.get(i).getConsumption() + data.get(j).getConsumption();
-	        			data.get(j).setConsumption(sum);
-	        			 
+	        			data.get(j).setConsumption(sum); 
 	        		};
 	        		series.getData().add(new Data<>(data.get(j).getDevice(), data.get(j).getConsumption()));
 	        	}
-	        	
-	        	//System.out.println(sum);
-	        	
 	        }
 	        
+	        // Adding series to the bar chart
 	        barchart.getData().add(series);
 	        
+	        // Positioning the bar chart
 	        root.setCenter(barchart);
-			
-	        
-			
         }
+		
         catch(Exception e) {
             System.out.println("Problems with input" + file);
             e.printStackTrace();
         }
-				
-        	
-        
-        
-        // Start of root
+					
         // Home button
         Button home = new Button("Home");
         root.setTop(home);
         
-        
-		
-		//Scene is container for all content 
+		//Scene is the container for all content 
         Scene scene = new Scene(root, 750, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
+        
+        // END OF DISPLAY
 		
 		// Event handling for buttons
         // Home button handler
@@ -117,15 +103,5 @@ public class Bar_chart {
             	homepg.start(primaryStage);
             }
         });
-	}
-
-	private void total_value() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private void total_value(Object sum) {
-		// TODO Auto-generated method stub
-		
 	}
 }
