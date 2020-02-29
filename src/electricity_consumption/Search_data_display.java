@@ -101,8 +101,6 @@ public class Search_data_display extends Application {
         search.setOnAction(new EventHandler<ActionEvent>() {
         	public void handle(ActionEvent arg0) {
         		
-        		
-        		
         		//Reading from the file
 				try (ObjectInputStream file_in = new ObjectInputStream(new FileInputStream(file))){
 					
@@ -110,15 +108,13 @@ public class Search_data_display extends Application {
 					ArrayList<Insert_data> data = (ArrayList<Insert_data>)file_in.readObject();
 					System.out.println("reading");
 					
-					
 					String d = date.getText();
-					
-					
 					
 					//Print data to text area
 					TextArea TA = new TextArea();
 					textArea.setEditable(false);
 					for(Insert_data print : data) {
+						System.out.println(print.getDevice());
 						if( d.equals(print.getDate())) {
 							TA.appendText(print.getDevice() + "\t" + print.getConsumption() + " \n");
 						}

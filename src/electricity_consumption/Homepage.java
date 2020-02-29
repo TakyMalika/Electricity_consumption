@@ -67,6 +67,19 @@ public class Homepage extends Application {
                 searchdate.start(primaryStage);
             }
         });
+        
+        btn3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                Bar_chart bar_chart = new Bar_chart();
+                try {
+					bar_chart.start(primaryStage);
+				} catch (Exception e1) {
+					System.out.println("Something wrong");
+					e1.printStackTrace();
+				}
+            }
+        });
 
         
     }
