@@ -62,11 +62,23 @@ public class Bar_chart {
 	        
 	        XYChart.Series<String, Number> series = new Series<>();
 	       
+	        System.out.println(data);
+	        
 	        
 	        
 	        for(int i = 0; i < data.size(); i++) {
+	        	//double[] sum = {data.get(i).getConsumption()};
+	        	for(int j = i + 1; j < data.size(); j++) {
+	        		if(data.get(i).getDevice().equals(data.get(j).getDevice())) {
+	        			double sum = data.get(i).getConsumption() + data.get(j).getConsumption();
+	        			data.get(j).setConsumption(sum);
+	        			 
+	        		};
+	        		series.getData().add(new Data<>(data.get(j).getDevice(), data.get(j).getConsumption()));
+	        	}
 	        	
-	        	series.getData().add(new Data<>(data.get(i).getDevice(), data.get(i).getConsumption()));   
+	        	//System.out.println(sum);
+	        	
 	        }
 	        
 	        barchart.getData().add(series);
@@ -92,7 +104,7 @@ public class Bar_chart {
         
 		
 		//Scene is container for all content 
-        Scene scene = new Scene(root, 650, 600);
+        Scene scene = new Scene(root, 750, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
 		
@@ -105,5 +117,15 @@ public class Bar_chart {
             	homepg.start(primaryStage);
             }
         });
+	}
+
+	private void total_value() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void total_value(Object sum) {
+		// TODO Auto-generated method stub
+		
 	}
 }
