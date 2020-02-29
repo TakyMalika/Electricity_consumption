@@ -53,21 +53,17 @@ public class Insert_data_display extends Application {
         grid.add(tilte, 0, 1, 2, 1);
 
         // Label Date
-        Label label0 = new Label("Date: ");
+        Label label0 = new Label("Date (DD/MM/YYYY): ");
         grid.add(label0, 0, 2);
-        // TextField
+        // TextField date
         TextField date = new TextField();
         grid.add(date, 1, 2);
         
+        // Label Devices
         Text devices = new Text("Devices");
         devices.setFont(Font.font("Tahoma", FontWeight.NORMAL, 16));
         grid.add(devices, 0, 3);
-        
-        Text hours = new Text("Hours");
-        hours.setFont(Font.font("Tahoma", FontWeight.NORMAL, 16));
-        grid.add(hours, 1, 3);
-
-        // Devices Option
+        // Device's Option
         ObservableList<String> options = FXCollections.observableArrayList(
         		"Dishwasher", 
         		"Fridge", 
@@ -83,7 +79,12 @@ public class Insert_data_display extends Application {
         ComboBox<String> comboBox = new ComboBox<>(options);
         comboBox.setStyle("-fx-font: bold 12pt \"Arial\"");
         grid.add(comboBox, 0, 4);
-        // TextField
+        
+        //Label Hour
+        Text hours = new Text("Hours");
+        hours.setFont(Font.font("Tahoma", FontWeight.NORMAL, 16));
+        grid.add(hours, 1, 3);
+        // TextField hour
         TextField hour = new TextField();
         grid.add(hour, 1, 4);
 
@@ -101,14 +102,14 @@ public class Insert_data_display extends Application {
         // Setting grid on left of BorderPane
         root.setLeft(grid);
         
-        //TextArea in the center fills the available space
+        //TextArea at the bottom
         TextArea textArea = new TextArea();
         textArea.setEditable(false);
         root.setBottom(textArea);
         
         // End of root
         
-        //Scene is container for all content 
+        //Scene is the container for all content 
         Scene scene = new Scene(root, 650, 600);
         primaryStage.setScene(scene);
 
@@ -127,8 +128,9 @@ public class Insert_data_display extends Application {
             }
         });
         
-        
-        ArrayList<Insert_data> data = new ArrayList<>();	//ArrayList for insert data
+        //ArrayList for inserting data
+        ArrayList<Insert_data> data = new ArrayList<>();
+        //Creating new file
         File file = new File("U:\\OOP\\Electricity_consumption\\src\\DevicesConsumption.txt");
 		
 		
@@ -137,15 +139,12 @@ public class Insert_data_display extends Application {
 			@SuppressWarnings("unchecked")
 			@Override
 			public void handle(ActionEvent arg0) {
-				
-				
-		        
 				String d = date.getText();
 				String option = comboBox.getValue();
 				double h = Double.parseDouble(hour.getText());
-				
 				double power = 0;
 				
+				//It switches the value according to selection
 				switch(option) {
 					case "Dishwasher": power = 1600; break;
 					case "Fridge": power = 200; break;
@@ -159,30 +158,25 @@ public class Insert_data_display extends Application {
 					case "Washing machine (60 degree)": power = 2500; break;
 				}
 				
+				// Consumption calculation
 				double c = (power * h) / 1000;
-				
+				// Adding data to the array 
 				data.add(new Insert_data(d, option, c));
 				
-				//Writing to the file
+				// Writing to the file
 				try (ObjectOutputStream file_out = new ObjectOutputStream(new FileOutputStream(file))){
-					System.out.println("writing");
 		            	file_out.writeObject(data);
-		            	
 		        }
 		        catch(Exception e) {
 		            System.out.println("Problems with output" + file);
 		            e.printStackTrace();
 		        }
 				
-				//Reading from the file
+				// Reading from the file
 				try (ObjectInputStream file_in = new ObjectInputStream(new FileInputStream(file))){
-					
 					ArrayList<Insert_data> data = (ArrayList<Insert_data>)file_in.readObject();
-					System.out.println("reading");
 					
-					
-					
-					//Print data to text area
+					//Print data to the text area
 					TextArea TA = new TextArea();
 					textArea.setEditable(false);
 					for(Insert_data print: data) {
@@ -194,12 +188,9 @@ public class Insert_data_display extends Application {
 		            System.out.println("Problems with input" + file);
 		            e.printStackTrace();
 		        }
-			    
-				
-	
+			
 			}
         });
-        
         
     }
 }
