@@ -40,10 +40,10 @@ public class Homepage extends Application {
         Button btn2 = new Button("Search a date");
         grid.add(btn2, 0, 6);
         
-        Button btn3 = new Button("See total bar chart");
+        Button btn3 = new Button("Bar chart");
         grid.add(btn3, 0, 7);
         
-        //Scene is container for all content 
+        //Scene is the container for all content 
         Scene scene = new Scene(grid, 400, 450);
         primaryStage.setScene(scene);
 
@@ -52,6 +52,7 @@ public class Homepage extends Application {
         //END OF DISPLAY
         
         // Event handling for buttons
+        // Insert data button handler 
         btn1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -60,6 +61,7 @@ public class Homepage extends Application {
             }
         });
         
+        // Search button handler
         btn2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -68,6 +70,7 @@ public class Homepage extends Application {
             }
         });
         
+        // Bar chart handler
         btn3.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -81,7 +84,6 @@ public class Homepage extends Application {
             }
         });
 
-        
     }
     
     // Main method
